@@ -17,7 +17,7 @@ var browserSync = require('browser-sync').create();
 var options = { 
 	cache: {},
 	packageCache: {},
-	entries: ['./src/index.js'],
+	entries: ['./src/index.jsx'],
 	debug: true
 };
 var bundler = watchify(browserify(options)); 

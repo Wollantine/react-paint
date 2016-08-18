@@ -5,9 +5,9 @@ It consists of a canvas, a brush tool with color and width, and undo and redo op
 
 ## How To Run It
 Git clone this repository and, inside the folder, do:
-´´´
+```
 npm i
 npm start
-´´´
+```
 
-Otherwise, I will publish it as a github page in [http://kwirke.github.io/react-paint](http://kwirke.github.io/react-paint) for everyone's delight.
+Otherwise, I will publish it as a github page in <http://kwirke.github.io/react-paint> for everyone's delight.
