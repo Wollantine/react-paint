@@ -37,6 +37,7 @@ function bundle() {
             browserSync.notify("Browserify Error!");
             this.emit("end");
         })
+        // Extracts the source map from a file
         .pipe(exorcist('dist/bundle.js.map'))
 		// Takes bundle text stream and outputs a 
 		//  gulp stream with the pretended name 'bundle.js'.
@@ -50,39 +51,13 @@ function bundle() {
 
 gulp.task('bundle', function() {
 	return bundle();
-
-	// return bundler.bundle()
-	// 	.pipe(source('bundle.js'))
-		// Needed by source maps
-    	// .pipe(buffer())
-		// Initializes source maps
-    	// .pipe(sourcemaps.init())
-
-    	// other transforms here
-
-    	// Finish source maps
-    	// .pipe(sourcemaps.write('.'))
-    	// .pipe(gulp.dest('./'));
 });
 
-// gulp.task('serve', function() {
-//   	return connect.server({
-// 	  	port: 5000,
-// 	  	livereload: true
-//   	});
-// });
-
-// gulp.task('default', ['bundle', 'serve'], function () {
-// 	return gulp.src(__filename)
-// 		.pipe(open({
-// 			uri: 'localhost:5000',
-// 		    app: 'chrome'
-// 		}));
-// });
 
 // Fires the server with browser-sync
 gulp.task('default', ['bundle'], function () {
 	browserSync.init({
-        server: "./"
+        server: "./",
+        files: ['src/*']
     });
 })
