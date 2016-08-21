@@ -2,11 +2,17 @@ import {combineReducers} from 'redux';
 import undoable from 'redux-undo';
 
 const initialState = {
-	canvas: null,
-	tool: null
+	canvasContext: null,
+	tool: {
+		type: 'brush',
+		properties: {
+			color: '#000',
+			size: 1
+		}
+	}
 };
 
-function canvas(state = initialState.canvas, action) {
+function canvasContext(state = initialState.canvas, action) {
 	switch (action.type) {
 		default:
 			return state;
@@ -21,7 +27,7 @@ function tool(state = initialState.tool, action) {
 }
 
 const reducer = combineReducers({
-	canvas: undoable(canvas),
+	canvas: undoable(canvasContext),
 	tool
 });
 

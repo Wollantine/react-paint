@@ -12,6 +12,7 @@ export class CanvasContainer extends Component {
 	constructor(props) {
 		super(props);
 
+		this.canvas = null;
 		this.ctx = null;
 		this.top = null;
 		this.left = null;
@@ -20,21 +21,22 @@ export class CanvasContainer extends Component {
 	}
 
 
-	initializeCanvasPosition(canvas) {
-		const {top, left} = canvas.getBoundingClientRect();
+	storeCanvasPosition() {
+		const {top, left} = this.canvas.getBoundingClientRect();
 		this.top = top;
 		this.left = left;
 		this.color = '#ff0000';
-		this.size = 1;
+		this.size = 3;
 	}
 
-	initializeContext(canvas) {
+	initializeState(canvas) {
+		this.canvas = canvas;
 		this.ctx = canvas.getContext('2d');
 	}
 
 	retrieveCanvasDetails(canvas) {
-		this.initializeContext(canvas);
-		this.initializeCanvasPosition(canvas);
+		this.initializeState(canvas);
+		this.storeCanvasPosition();
 	}
 
 	clearCanvas() {
@@ -51,6 +53,7 @@ export class CanvasContainer extends Component {
 	}
 
 	onMouseDown(e) {
+		this.storeCanvasPosition(this.canvas);
 		let {x, y} = this.getCursorPosition(e);
 
 		this.startPainting({
