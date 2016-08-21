@@ -8,6 +8,6 @@ const store = createStore(reducer);
 
 export default () => (
 	<Provider store={store}>
-		<Canvas width={800} height={600}/>
+		<Canvas width={400} height={300}/>
 	</Provider>
 );

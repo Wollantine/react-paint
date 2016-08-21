@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import './canvas.css';
 
 export class CanvasContainer extends Component {
 
@@ -7,8 +8,6 @@ export class CanvasContainer extends Component {
 		width: PropTypes.integer.isRequired,
 		height: PropTypes.integer.isRequired
 	}
-
-	defaultProps:{}
 	
 	constructor(props) {
 		super(props);
@@ -16,6 +15,8 @@ export class CanvasContainer extends Component {
 		this.ctx = null;
 		this.top = null;
 		this.left = null;
+		this.stroke = null;
+		this.startPoint = [];
 	}
 
 
@@ -50,22 +51,70 @@ export class CanvasContainer extends Component {
 	}
 
 	onMouseDown(e) {
-		let {x,y} = this.getCursorPosition(e);
-		console.log({x,y});
+		let {x, y} = this.getCursorPosition(e);
 
-		let stroke = {
-			x,
-			y,
+		this.startPainting({
 			color: this.color,
 			size: this.size
+		});
+		this.startPoint = {x, y};
+	}
+
+	onMouseUp(e) {
+		this.stopPainting();
+	}
+
+	paintMoveEvent(e) {
+		if (this.shouldPaint()) {
+			let {x, y} = this.getCursorPosition(e);
+			this.drawLine(this.startPoint, {x, y}, this.stroke);
+			this.startPoint = {x, y};
 		}
 	}
 
-	onMouseUp(e) {}
+	drawLine(a, b, stroke) {
+		let ctx = this.ctx;
+		ctx.lineJoin = 'round';
+		ctx.linePath = 'round';
+		ctx.lineWidth = stroke.size;
+		ctx.strokeStyle = stroke.color;
+		ctx.beginPath();
+		ctx.moveTo(a.x, a.y);
+		ctx.lineTo(b.x, b.y);
+		ctx.closePath();
+		ctx.stroke();
+	}
 
-	onMouseMove(e) {}
+	shouldPaint() {
+		return this.stroke !== null;
+	}
 
-	onMouseOut(e) {}
+	startPainting({color, size}) {
+		this.stroke = {color, size};
+	}
+
+	stopPainting() {
+		this.stroke = null;
+	}
+
+	onMouseMove(e) {
+		if (this.outside) {
+			// MouseEvent.buttons == 1 iff mouse left button is clicked during the movement
+			if (e.buttons == 1) {
+				this.startPoint = this.getCursorPosition(e);
+			}
+			else {
+				this.stopPainting();
+			}
+			this.outside = false;
+		}
+		this.paintMoveEvent(e);
+	}
+
+	onMouseOut(e) {
+		this.outside = true;
+		this.paintMoveEvent(e);
+	}
 
 	render() {
 		const {width, height} = this.props;
@@ -73,6 +122,7 @@ export class CanvasContainer extends Component {
 		this.clearCanvas();
 
 		return (
+			// React's ref attribute is executed when element gets rendered
 			<canvas ref={this.retrieveCanvasDetails.bind(this)}
 				width={width} height={height}
 				onMouseDown={this.onMouseDown.bind(this)}

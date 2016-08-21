@@ -14,7 +14,7 @@ var exorcist = require('exorcist');
 var browserSync = require('browser-sync').create();
 
 // Configure browserify
-var options = { 
+var options = {
 	cache: {},
 	packageCache: {},
 	entries: ['./src/index.jsx'],
@@ -22,9 +22,13 @@ var options = {
 };
 var bundler = watchify(browserify(options)); 
 
+// Compile to JS with babel
 bundler.transform(babelify.configure({
     sourceMapRelative: 'src'
 }));
+
+// Allow to require() CSS files
+bundler.transform('browserify-css', { autoInject: true });
 
 bundler.on('update', bundle);
 
