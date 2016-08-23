@@ -1,12 +1,28 @@
-import React from 'react';
-import {ButtonGroup, Button} from 'react-bootstrap';
-import Icon from '../icon/Icon.js';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import ColorPickerView from './ColorPickerView.jsx';
 
-export default (props) => {
-	return (
-		<ButtonGroup>
-			<Button><Icon icon="undo"/></Button>
-			<Button><Icon icon="repeat"/></Button>
-		</ButtonGroup>
-	);
+export class ColorPickerContainer extends Component {
+
+	propTypes:{
+	}
+	
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return (
+			<ColorPickerView/>
+		);
+	}
+
 }
+
+// const mapDispatchToProps = (dispatch) => ({
+	
+// });
+
+const ColorPicker = ColorPickerContainer;
+
+export default ColorPicker;

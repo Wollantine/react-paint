@@ -48,11 +48,13 @@
     "watchify": "^3.7.0"
   },
   "dependencies": {
+    "rc-slider": "^4.0.1",
     "react": "^15.3.0",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
+    "redux-logger": "^2.6.1",
     "redux-undo": "^1.0.0-beta9"
   }
 }

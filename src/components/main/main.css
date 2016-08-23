@@ -3,3 +3,7 @@
 
 /* Font Awesome */
 @import '../../../assets/vendor-css/font-awesome.min.css';
+
+.main {
+	margin-top: 20px;
+}

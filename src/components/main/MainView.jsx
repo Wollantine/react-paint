@@ -8,7 +8,7 @@ export default (props) => {
 	const {width, height} = props;
 
 	return (
-		<Col mdOffset={2} md={8}>
+		<Col className="main" mdOffset={2} md={8}>
 			<Col md={8}>
 				<Canvas width={width} height={height}/>
 			</Col>
