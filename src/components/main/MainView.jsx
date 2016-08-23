@@ -2,6 +2,7 @@ import React from 'react';
 import {Col} from 'react-bootstrap';
 import Canvas from '../canvas/Canvas.jsx';
 import Toolbox from '../toolbox/Toolbox.jsx';
+import './main.css';
 
 export default (props) => {
 	const {width, height} = props;

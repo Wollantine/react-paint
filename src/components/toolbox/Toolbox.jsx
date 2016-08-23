@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 // import './toolbox.css';
+import Undoer from '../undoer/Undoer.jsx';
 
 export class ToolboxContainer extends Component {
 
@@ -15,7 +16,7 @@ export class ToolboxContainer extends Component {
 
 	render() {
 		return (
-			<div></div>
+			<Undoer/>
 		);
 	}
 

@@ -1,1 +1,5 @@
+/* Bootstrap styles */
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css");
+
+/* Font Awesome */
+@import '../../../assets/vendor-css/font-awesome.min.css';

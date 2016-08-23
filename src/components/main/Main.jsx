@@ -3,7 +3,6 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from '../../reducers/reducers.js';
 import MainView from './MainView.jsx';
-import './main.css';
 
 const store = createStore(reducer);
 
