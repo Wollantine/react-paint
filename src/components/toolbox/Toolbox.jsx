@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 // import './toolbox.css';
 import Undoer from '../undoer/Undoer.jsx';
+import ColorPicker from '../color-picker/ColorPicker.jsx';
+import SizePicker from '../size-picker/SizePicker.jsx';
 
 export class ToolboxContainer extends Component {
 
@@ -16,7 +18,11 @@ export class ToolboxContainer extends Component {
 
 	render() {
 		return (
-			<Undoer/>
+			<div>
+				<Undoer/>
+				<ColorPicker/>
+				<SizePicker/>
+			</div>
 		);
 	}
 
