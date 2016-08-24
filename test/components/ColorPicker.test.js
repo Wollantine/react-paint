@@ -1,6 +1,6 @@
 import chai from 'chai';
 import sinon from 'sinon';
-import {render, shallow} from 'enzyme';
+import {render, mount, shallow} from 'enzyme';
 import ColorPickerView, {splitInChunks, 
 	renderColorButton, 
 	renderRowOfButtons} from '../../src/components/color-picker/ColorPickerView.jsx';
@@ -114,6 +114,20 @@ describe('<ColorPickerView/>', () => {
 		it('should render all rows', () => {
 			let numOfRows = parseInt(defaultColors.length / rowSize) + 1;
 			wrapper.should.have.exactly(numOfRows).descendants('.row');
+		})
+
+		it('should distinguish between clicks in two different buttons with colors', () => {
+			let colorPickerButtons = mount(view).find('button');
+			let firstButton = colorPickerButtons.at(0);
+			let secondButton = colorPickerButtons.at(1);
+
+			firstButton.simulate('click');
+			onChangeColor.should.have.been.calledWith(defaultColors[0]);
+			onChangeColor.reset();
+
+			secondButton.simulate('click');
+			onChangeColor.should.have.been.calledWith(defaultColors[1]);
+			onChangeColor.reset();
 		})
 
 	})

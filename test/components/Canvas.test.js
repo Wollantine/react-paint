@@ -1,8 +1,12 @@
-import enzyme from 'enzyme';
+import {render, mount} from 'enzyme';
 import chai from 'chai';
-chai.should();
+import CanvasView from '../../src/components/size-picker/SizePickerView.jsx';
 
-describe('<Canvas/>', () => {
+describe('<CanvasView/>', () => {
+
+	let view = null,
+		wrapper = null;
+
 
 	it('should render a canvas', () => {
 

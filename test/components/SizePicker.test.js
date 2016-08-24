@@ -1,6 +1,6 @@
 import chai from 'chai';
 import sinon from 'sinon';
-import {render, shallow} from 'enzyme';
+import {render, shallow, mount} from 'enzyme';
 import SizePickerView from '../../src/components/size-picker/SizePickerView.jsx';
 
 describe('<SizePickerView/>', () => {
@@ -26,5 +26,12 @@ describe('<SizePickerView/>', () => {
 	it('should have the brushSize as value', () => {
 		wrapper.find('input').should.have.value(''+brushSize);
 	})
-	
+
+	it('should call changeBrushSize on change', () => {
+		const input = mount(view).find('input');
+
+		input.simulate('change', {target: {value: '0'}});
+		changeBrushSize.should.have.been.called;
+	})
+
 })
