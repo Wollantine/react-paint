@@ -6,6 +6,8 @@ import changeStrokeProperty from '../../actions/ChangeStrokeProperty.js';
 export class SizePickerContainer extends Component {
 
 	propTypes:{
+		size: PropTypes.number.isRequired,
+		onChangeSize: PropTypes.func.isRequired
 	}
 	
 	constructor(props) {

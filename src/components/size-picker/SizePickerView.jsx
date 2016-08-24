@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {FormGroup, FormControl} from 'react-bootstrap';
-import Icon from '../icon/Icon.js';
 
-export default (props) => {
+const SizePickerView = (props) => {
 	const {brushSize, changeBrushSize} = props;
 
 	return (
@@ -16,4 +15,11 @@ export default (props) => {
 			/>
 		</FormGroup>
 	);
-}
+};
+
+SizePickerView.propTypes = {
+    brushSize: PropTypes.number.isRequired,
+    changeBrushSize: PropTypes.func.isRequired
+};
+
+export default SizePickerView;

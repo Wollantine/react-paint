@@ -4,14 +4,18 @@ import {CHANGE_STROKE_PROPERTY} from '../actions/actionTypes.js';
 
 const initialState = {
 	canvasContext: null,
+	// Current tool
 	tool: {
 		type: 'pencil',
 	},
+	// These are the only allowed stroke properties. If you need to
+	// set more properties, you have to add the default value here.
 	stroke: {
 		color: '#000',
 		size: 1
 	},
 	defaultOptions: {
+		// Predefined colors palette
 		defaultColors: [
 			'#f00',
 			'#f08',
@@ -34,6 +38,7 @@ const initialState = {
 			'#880',
 			'#558'
 		],
+		// Allowed tools
 		defaultTools: [
 			'pencil'
 		]
@@ -65,10 +70,18 @@ export function stroke(state = initialState.stroke, action) {
 	}
 }
 
+export function defaultOptions(state = initialState.defaultOptions, action) {
+	switch (action.type) {
+		default:
+			return state;
+	}
+}
+
 const reducer = combineReducers({
 	canvas: undoable(canvasContext),
 	tool,
-	stroke
+	stroke,
+	defaultOptions
 });
 
 export default reducer;
