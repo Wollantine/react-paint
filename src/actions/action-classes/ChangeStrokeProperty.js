@@ -1,12 +1,10 @@
 import actionTypes from '../actionTypes.js';
 import Action from './Action.js';
+import initialState from '../../reducers/initialState.js';
 
 const spec = actionTypes.CHANGE_STROKE_PROPERTY;
 
-const allowedProperties = [
-	'color',
-	'size'
-];
+const allowedProperties = initialState.stroke;
 
 class ChangeStrokeProperty extends Action {
 
@@ -26,7 +24,7 @@ class ChangeStrokeProperty extends Action {
 	validateData(data) {
 		let property = data.property;
 
-		if (!~allowedProperties.indexOf(property)) {
+		if (typeof allowedProperties[property] === 'undefined') {
 			throw new Error('Stroke property '+property+' not allowed.');
 		}
 	}
