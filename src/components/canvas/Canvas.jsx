@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import './canvas.css';
 
 export class CanvasContainer extends Component {
 
@@ -126,8 +125,9 @@ export class CanvasContainer extends Component {
 
 		return (
 			// React's ref attribute is executed when element gets rendered
-			<canvas ref={this.retrieveCanvasDetails.bind(this)}
+			<CanvasView
 				width={width} height={height}
+				onMount={this.retrieveCanvasDetails.bind(this)}
 				onMouseDown={this.onMouseDown.bind(this)}
 				onMouseUp={this.onMouseUp.bind(this)}
 				onMouseMove={this.onMouseMove.bind(this)}
