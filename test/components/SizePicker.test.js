@@ -1,4 +1,3 @@
-import chai from 'chai';
 import sinon from 'sinon';
 import {render, shallow, mount} from 'enzyme';
 import SizePickerView from '../../src/components/size-picker/SizePickerView.jsx';

@@ -1,6 +1,8 @@
 import {combineReducers} from 'redux';
 import undoable from 'redux-undo';
-import {CHANGE_STROKE_PROPERTY} from '../actions/actionTypes.js';
+import actionTypes from '../actions/actionTypes.js';
+
+const CHANGE_STROKE_PROPERTY = actionTypes.CHANGE_STROKE_PROPERTY.type;
 
 const initialState = {
 	canvasContext: null,

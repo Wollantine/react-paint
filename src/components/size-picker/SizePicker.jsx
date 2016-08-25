@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import SizePickerView from './SizePickerView.jsx';
-import changeStrokeProperty from '../../actions/ChangeStrokeProperty.js';
+import createAction from '../../actions/ActionFactory.js';
 
 export class SizePickerContainer extends Component {
 
@@ -34,7 +34,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	onChangeSize: (size) => {
-		dispatch(changeStrokeProperty({property: 'size', value: size}));
+		dispatch(createAction('CHANGE_STROKE_PROPERTY', {property: 'size', value: size}));
 	}
 });
 

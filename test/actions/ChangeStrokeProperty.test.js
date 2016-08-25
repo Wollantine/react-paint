@@ -1,31 +1,39 @@
-import createAction from '../../src/actions/ActionFactory.js';
+import Action from '../../src/actions/action-classes/ChangeStrokeProperty.js';
 import actionTypes from '../../src/actions/actionTypes.js';
-import chai from 'chai';
-chai.should();
 
 
-describe('ActionFactory', () => {
+describe('ChangeStrokeProperty', () => {
 
-	it('should return a valid action object', () => {
-		let action = createAction('CHANGE_STROKE_PROPERTY', {property: 'a', value: 'b'});
-		let expected = {type: actionTypes.CHANGE_STROKE_PROPERTY.type, property: 'a', value: 'b'};
+	let spec = actionTypes.CHANGE_STROKE_PROPERTY;
 
-		action.should.deep.equal(expected);
-	});
+	it('should return a new ChangeStrokeProperty action', () => {
+		let type = spec.type,
+			data = {property: 'color', value: '#aaa'};
 
-	it('should throw Error upon non existing type', () => {
-		const action = createAction;
+		let expected = {type, ...data};
 
-		action.bind(action, '', {}).should.throw(Error);
-	});
+		let action = new Action(type, data);
 
-	it('should throw SyntaxError upon missing property', () => {
-		const action = createAction;
-		const type = 'CHANGE_STROKE_PROPERTY';
-		
-		action.bind(action, type, 'hi!').should.throw(SyntaxError);
-		action.bind(action, type, {property: 'a'}).should.throw(SyntaxError);
-		action.bind(action, type, {value: 'a'}).should.throw(SyntaxError);
-	});
+		action.getDispatchable().should.deep.equal(expected);
+	})
 
-});
+	it('should throw Error upon wrong type', () => {
+		let type = 'TYPE',
+			data = {property: 'color', value: '#aaa'};
+
+		let action = () => (new Action(type, data));
+
+		action.should.throw(Error);
+	})
+
+	it('should throw Error upon wrong property', () => {
+		let type = spec.type,
+			// Correct property name is 'size'
+			data = {property: 'width', value: 5};
+
+		let action = () => (new Action(type, data));
+
+		action.should.throw(Error);
+	})
+
+})

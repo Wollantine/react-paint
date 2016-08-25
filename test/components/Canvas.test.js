@@ -1,5 +1,4 @@
 import {render, mount} from 'enzyme';
-import chai from 'chai';
 import CanvasView from '../../src/components/size-picker/SizePickerView.jsx';
 
 describe('<CanvasView/>', () => {

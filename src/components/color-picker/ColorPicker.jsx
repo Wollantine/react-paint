@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import ColorPickerView from './ColorPickerView.jsx';
-import changeStrokeProperty from '../../actions/ChangeStrokeProperty.js';
+import createAction from '../../actions/ActionFactory.js';
 
 export class ColorPickerContainer extends Component {
 
@@ -39,7 +39,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	onChangeColor: (color) => {
-		dispatch(changeStrokeProperty({property: 'color', value: color}));
+		dispatch(createAction('CHANGE_STROKE_PROPERTY', {property: 'color', value: color}));
 	}
 });
 

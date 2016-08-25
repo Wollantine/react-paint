@@ -1,4 +1,3 @@
-import chai from 'chai';
 import sinon from 'sinon';
 import {render, mount, shallow} from 'enzyme';
 import ColorPickerView, {splitInChunks, 
