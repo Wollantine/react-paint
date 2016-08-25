@@ -4,7 +4,7 @@
   "description": "React implementation of a simple paint tool in html5's canvas.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register -r ignore-styles -r ./test/index.js --recursive",
+    "test": "mocha test/**/*.test.js --compilers js:babel-register -r ignore-styles -r ./test/index.js --recursive",
     "start": "gulp"
   },
   "repository": {

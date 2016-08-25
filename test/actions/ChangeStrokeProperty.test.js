@@ -1,25 +1,31 @@
-import changeStrokeProperty from '../../src/actions/ChangeStrokeProperty.js';
-import {CHANGE_STROKE_PROPERTY} from '../../src/actions/actionTypes.js';
+import createAction from '../../src/actions/ActionFactory.js';
+import actionTypes from '../../src/actions/actionTypes.js';
 import chai from 'chai';
 chai.should();
 
 
-describe('ChangeStrokeProperty action', () => {
+describe('ActionFactory', () => {
 
 	it('should return a valid action object', () => {
-		let action = changeStrokeProperty({property: 'a', value: 'b'});
-		let expected = {type: CHANGE_STROKE_PROPERTY, property: 'a', value: 'b'};
+		let action = createAction('CHANGE_STROKE_PROPERTY', {property: 'a', value: 'b'});
+		let expected = {type: actionTypes.CHANGE_STROKE_PROPERTY.type, property: 'a', value: 'b'};
 
 		action.should.deep.equal(expected);
 	});
 
+	it('should throw Error upon non existing type', () => {
+		const action = createAction;
 
-	it('should throw upon missing property', () => {
-		const action = changeStrokeProperty;
+		action.bind(action, '', {}).should.throw(Error);
+	});
+
+	it('should throw SyntaxError upon missing property', () => {
+		const action = createAction;
+		const type = 'CHANGE_STROKE_PROPERTY';
 		
-		action.bind(action, 'hi!').should.throw(SyntaxError);
-		action.bind(action, {property: 'a'}).should.throw(SyntaxError);
-		action.bind(action, {value: 'a'}).should.throw(SyntaxError);
+		action.bind(action, type, 'hi!').should.throw(SyntaxError);
+		action.bind(action, type, {property: 'a'}).should.throw(SyntaxError);
+		action.bind(action, type, {value: 'a'}).should.throw(SyntaxError);
 	});
 
 });
