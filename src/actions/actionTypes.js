@@ -1,6 +1,7 @@
 const actionTypes = {
 	CHANGE_STROKE_PROPERTY: {
 		type: 'react-paint/stroke/CHANGE_STROKE_PROPERTY',
+		class: 'ChangeStrokeProperty',
 		args: [
 			'property',
 			'value'

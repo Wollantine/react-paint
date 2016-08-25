@@ -4,7 +4,6 @@ export class ActionFactory {
 	
 	getActionSpecification(actionName) {
 		let actionSpec = actionTypes[actionName];
-
 		if (typeof actionSpec === 'undefined') {
 			throw new Error('Action type '+actionName+' does not exist.')
 		}
@@ -29,13 +28,30 @@ export class ActionFactory {
 		}, {});
 	}
 
+	getActionClassName(actionSpec) {
+		let className = actionSpec.class;
+		if (typeof className === 'undefined') {
+			// base class
+			className = 'Action';
+		}
+		return className;
+	}
+
+	// Requires the class from this folder
+	getActionClass(actionSpec) {
+		return require('./action-classes/'+this.getActionClassName(actionSpec)+'.js').default;
+	}
+
 	createAction(actionName, data) {
 		let spec = this.getActionSpecification(actionName);
 
-		return {
-			type: this.getActionType(actionName, spec),
-			...this.getValidatedData(actionName, spec, data)
-		}
+		let type = this.getActionType(actionName, spec);
+		data = this.getValidatedData(actionName, spec, data);
+
+		let Action = this.getActionClass(spec);
+		let action = new Action(type, data);
+		
+		return action.getDispatchable();
 	}
 
 }
