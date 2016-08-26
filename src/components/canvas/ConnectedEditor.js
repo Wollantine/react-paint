@@ -1,10 +1,28 @@
 import { connect, getDiff } from 'redux-haiku';
 import Editor from './Editor.js';
 
-const ConnectedEditor = ({canvas, stroke, drawStroke}) => {
+class ConnectedEditor {
+	
+	constructor(editor) {
+		this.editor = editor;
+		this.drawStroke = null;
+	}
+	
+	listener({canvas, stroke, drawStroke}) {
+		console.log("hola");
+		this.drawStroke = drawStroke;
+		
+		
+	}
 
-};
+	drawStroke(canvas) {
+		if (this.drawStroke !== null) {
+			this.drawStroke(canvas);
+		}
+	}
+}
 
+export default ConnectedEditor.connect.bind()
 
 const mapStateToProps = (state) => ({
 	canvas: state.canvas,
@@ -17,4 +35,4 @@ const mapDispatchToProps = (dispatch) => ({
 	}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConnectedEditor);
+export default connect(mapStateToProps, mapDispatchToProps)(ConnectedEditor.listener.bind(ConnectedEditor));

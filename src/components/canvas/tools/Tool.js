@@ -1,3 +1,4 @@
+import { connect, getDiff } from 'redux-haiku';
 
 /* abstract */ class Tool {
 

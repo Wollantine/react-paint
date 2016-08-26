@@ -11,8 +11,9 @@ const store = createStore(reducer, applyMiddleware(
 	logger
 ));
 
+// We pass the store down the component hierarchy because non-component subscribers (Editor) need it
 export default () => (
 	<Provider store={store}>
-		<MainView width={400} height={300}/>
+		<MainView width={400} height={300} store={store}/>
 	</Provider>
 );

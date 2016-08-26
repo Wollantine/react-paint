@@ -5,10 +5,11 @@ import Editor from './Editor.js';
 
 export class Canvas extends Component {
 
-	propTypes:{
+	static propTypes = {
 		width: PropTypes.integer.isRequired,
-		height: PropTypes.integer.isRequired
-	}
+		height: PropTypes.integer.isRequired,
+		store: PropTypes.any.isRequired
+	};
 	
 	constructor(props) {
 		super(props);
@@ -18,7 +19,7 @@ export class Canvas extends Component {
 
 
 	initEditor(canvas) {
-		this.editor = new Editor(canvas, this.props.width, this.props.height);
+		this.editor = new Editor(canvas, this.props.width, this.props.height, this.props.store);
 	}
 
 	onMouseDown(e) {

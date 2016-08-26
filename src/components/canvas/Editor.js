@@ -1,18 +1,44 @@
 import createAction from '../../../actions/ActionFactory.js';
 import initialState from '../../../reducers/initialState.js';
+import { connect, getDiff } from 'redux-haiku';
 
 import Tool from './tools/Tool.js';
 import Brush from './tools/Brush.js';
 
 class Editor {
 
-	constructor(canvas, width, height) {
+	constructor(canvas, width, height, store) {
 		this.canvas = canvas;
 		this.ctx = canvas.getContext('2d');
 		this.width = width;
 		this.height = height;
+		this.connectToStore(store);
 		this.setTool(initialState.defaultOptions.defaultTool);
 		this.updateCanvasPosition(canvas);
+	}
+
+	connectToStore(store) {
+		this.store = store;
+		connect(this.mapStateToProps)(this.listener.bind(this))(store);
+	}
+	
+	mapStateToProps(state) {
+		return {
+			canvas: state.canvas,
+			stroke: state.stroke
+		};
+	}
+	
+	mapDispatchToProps(dispatch) {
+		return {
+			drawStroke: (canvas) => {
+				dispatch(createAction('DRAW_STROKE', {canvas}))
+			}
+		}
+	}
+	
+	listener() {
+		
 	}
 
 	setTool(toolName) {
@@ -22,7 +48,7 @@ class Editor {
 				tool = Brush;
 		}
 
-		this.tool = new tool(this.ctx, {color: '#0f0', size: 3});
+		this.tool = new tool(this.ctx, {color: '#0f0', size: 3}, this.store);
 	}
 
 	updateCanvasPosition(canvas) {
