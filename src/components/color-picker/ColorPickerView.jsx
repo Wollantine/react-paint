@@ -43,7 +43,7 @@ const ColorPickerView = (props) => {
 	const {defaultColors, rowSize, onChangeColor} = props;
 
 	return (
-		<Col>
+		<Col md={12}>
 			{splitInChunks(defaultColors, rowSize)
 				.map((rowOfColors, index) => (renderRowOfButtons(rowOfColors, index, onChangeColor)))
 			}

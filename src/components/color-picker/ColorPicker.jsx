@@ -15,7 +15,6 @@ export class ColorPickerContainer extends Component {
 	}
 
 	changeColor(color) {
-		console.log(color);
 		this.props.onChangeColor(color);
 	}
 

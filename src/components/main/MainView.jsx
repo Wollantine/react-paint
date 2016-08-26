@@ -9,10 +9,10 @@ export default (props) => {
 
 	return (
 		<Col className="main" mdOffset={2} md={8}>
-			<Col md={8}>
+			<Col md={7}>
 				<Canvas width={width} height={height}/>
 			</Col>
-			<Col mdOffset={1} md={3}>
+			<Col md={5}>
 				<Toolbox/>
 			</Col>
 		</Col>

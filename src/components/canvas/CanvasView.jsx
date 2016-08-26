@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import './canvas.css';
 
 const CanvasView = (props) => {
-	{width,
+	const {width,
 	height,
 	onMount,
 	onMouseDown,
@@ -12,7 +12,7 @@ const CanvasView = (props) => {
 
 	return (
 		// React's ref attribute is executed when element gets rendered
-		<canvas ref={retrieveCanvasDetails}
+		<canvas ref={onMount}
 			width={width} height={height}
 			onMouseDown={onMouseDown}
 			onMouseUp={onMouseUp}
@@ -23,8 +23,8 @@ const CanvasView = (props) => {
 };
 
 CanvasView.propTypes = {
-    width: PropTypes.integer.isRequired,
-	height: PropTypes.integer.isRequired,
+    width: PropTypes.number.isRequired,
+	height: PropTypes.number.isRequired,
 	onMount: PropTypes.func.isRequired,
 	onMouseDown: PropTypes.func.isRequired,
 	onMouseUp: PropTypes.func.isRequired,

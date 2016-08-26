@@ -1,5 +1,19 @@
 import actionTypes from './actionTypes.js';
 
+/**
+ *	# Important Note
+ *
+ * This should import all the classes in ./action-classes folder.
+ *
+ * This is because browserify doesn't support dynamic require()s
+ * (requiring modules in runtime that could not get bundled 
+ * previously because static code analysis didn't see them required).
+ */
+import './action-classes/Action.js';
+import './action-classes/ChangeStrokeProperty.js';
+
+
+
 export class ActionFactory {
 	
 	getActionSpecification(actionName) {
@@ -50,7 +64,7 @@ export class ActionFactory {
 
 		let Action = this.getActionClass(spec);
 		let action = new Action(type, data);
-		
+
 		return action.getDispatchable();
 	}
 

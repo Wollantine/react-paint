@@ -5,17 +5,17 @@ import createAction from '../../actions/ActionFactory.js';
 
 export class SizePickerContainer extends Component {
 
-	propTypes:{
+	static propTypes = {
 		size: PropTypes.number.isRequired,
 		onChangeSize: PropTypes.func.isRequired
-	}
+	};
 	
 	constructor(props) {
 		super(props);
 	}
 
 	changeSize(e) {
-		this.props.onChangeSize(e.target.value);
+		this.props.onChangeSize(parseInt(e.target.value));
 	}
 
 	render() {
