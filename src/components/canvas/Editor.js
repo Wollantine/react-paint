@@ -1,3 +1,6 @@
+import createAction from '../../../actions/ActionFactory.js';
+import initialState from '../../../reducers/initialState.js';
+
 import Tool from './tools/Tool.js';
 import Brush from './tools/Brush.js';
 
@@ -8,7 +11,7 @@ class Editor {
 		this.ctx = canvas.getContext('2d');
 		this.width = width;
 		this.height = height;
-		this.setTool('brush');
+		this.setTool(initialState.defaultOptions.defaultTool);
 		this.updateCanvasPosition(canvas);
 	}
 

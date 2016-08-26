@@ -6,6 +6,10 @@
 		this.stroke = stroke;
 	}
 
+	dispatchNewState() {
+		
+	}
+
 	setStroke(stroke) {
 		this.ctx.lineJoin = 'round';
 		this.ctx.linePath = 'round';

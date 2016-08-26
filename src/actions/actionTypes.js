@@ -17,7 +17,7 @@ const actionTypes = {
 	},
 	DRAW_STROKE: {
 		type: 'react-paint/canvas/DRAW_STROKE',
-		args: []
+		args: ['canvas']
 	}
 };
 

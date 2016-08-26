@@ -1,8 +1,8 @@
 const initialState = {
-	canvasContext: null,
+	canvas: null,
 	// Current tool
 	tool: {
-		type: 'pencil',
+		type: 'brush'
 	},
 	// These are the only allowed stroke properties. If you need to
 	// set more properties, you have to add the default value here.
@@ -34,10 +34,8 @@ const initialState = {
 			'#880',
 			'#558'
 		],
-		// Allowed tools
-		defaultTools: [
-			'pencil'
-		]
+		// Initial tool
+		defaultTool: 'brush'
 	}
 };
 

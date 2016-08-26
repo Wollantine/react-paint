@@ -22,6 +22,7 @@ class Brush extends Tool {
 	}
 
 	onMouseMove({x, y}, clickedButtons, event) {
+		let finished = false;
 		if (this.outside) {
 			// MouseEvent.buttons == 1 iff mouse left button is clicked during the movement
 			if (clickedButtons == 1) {
@@ -29,15 +30,18 @@ class Brush extends Tool {
 			}
 			else {
 				this.shouldPaint = false;
+				finished = true;
 			}
 			this.outside = false;
 		}
 		this.paintMove({x, y});
 		this.startPoint = {x, y};
+		if (finished) this.dispatchNewState();
 	}
 
 	onMouseUp(event) {
 		this.shouldPaint = false;
+		this.dispatchNewState();
 	}
 
 	onMouseOut({x, y}, event) {
