@@ -5,7 +5,7 @@ const SizePickerView = (props) => {
 	const {brushSize, changeBrushSize} = props;
 
 	return (
-		<Col md={4} mdOffset={2}>
+		<Col md={4}>
 			<FormGroup>
 				<FormControl
 					type="number" 

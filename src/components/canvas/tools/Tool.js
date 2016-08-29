@@ -3,21 +3,19 @@ import createAction from '../../../actions/ActionFactory.js';
 
 /* abstract */ class Tool {
 
-	constructor(context, stroke, width, height, store) {
+	constructor(context, stroke, editorGetImage, store) {
 		this.ctx = context;
-		this.stroke = stroke;
-		this.width = width;
-		this.height = height;
+		this.setStroke(stroke);
+		this.editorGetImage = editorGetImage;
 		this.connectToStore(store);
 	}
 
 	connectToStore(store) {
 		this.store = store;
-		connect(this.mapStateToProps, this.mapDispatchToProps)(this.listener.bind(this))(store);
+		connect(this.mapStateToProps)(this.listener.bind(this))(store);
 	}
 
-	listener({stroke, drawStroke}) {
-		this.drawStroke = drawStroke;
+	listener({stroke}) {
 		this.setStroke(stroke);
 	}
 
@@ -27,14 +25,14 @@ import createAction from '../../../actions/ActionFactory.js';
 		};
 	}
 
-	mapDispatchToProps(dispatch) {
-		return {
-			drawStroke: (canvas) => dispatch(createAction('DRAW_STROKE', {canvas}))
-		}
+	dispatchNewState() {
+		let image = this.editorGetImage();
+		this.store.dispatch(createAction('DRAW_STROKE', {image}));
 	}
 
-	dispatchNewState() {
-		this.drawStroke(this.ctx.getImageData(0, 0, this.width, this.height));
+	replaceDispatchedState() {
+		let image = this.editorGetImage();
+		this.store.dispatch(createAction('EXTEND_STROKE', {image}));
 	}
 
 	setStroke(stroke) {
@@ -45,7 +43,6 @@ import createAction from '../../../actions/ActionFactory.js';
 	}
 
 	paintPath(points) {
-		this.setStroke(this.stroke);
 		if (points.length > 0) {
 			this.ctx.beginPath();
 			this.ctx.moveTo(points[0].x, points[0].y);

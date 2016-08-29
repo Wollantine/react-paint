@@ -43,6 +43,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
     "ignore-styles": "^4.0.0",
+    "jsdom": "^9.4.2",
     "mocha": "^3.0.2",
     "sinon": "^1.17.5",
     "sinon-chai": "^2.8.0",
@@ -53,12 +54,12 @@
   "dependencies": {
     "rc-slider": "^4.0.1",
     "react": "^15.3.0",
+    "react-addons-test-utils": "^15.3.1",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-haiku": "^0.1.4",
-    "redux-logger": "^2.6.1",
-    "redux-undo": "^1.0.0-beta9"
+    "redux-logger": "^2.6.1"
   }
 }

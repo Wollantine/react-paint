@@ -1,5 +1,4 @@
 import {combineReducers} from 'redux';
-import undoable from 'redux-undo';
 import actionTypes from '../actions/actionTypes.js';
 import initialState from './initialState.js';
 
@@ -7,8 +6,37 @@ const CHANGE_STROKE_PROPERTY = actionTypes.CHANGE_STROKE_PROPERTY.type;
 
 
 
-function canvasContext(state = initialState.canvas, action) {
+function canvas(state = initialState.canvas, action) {
 	switch (action.type) {
+		case actionTypes.DRAW_STROKE.type:
+			// Update history
+			return {
+				past: [...state.past, state.present],
+				present: {image: action.image},
+				future: []
+			};
+		case actionTypes.EXTEND_STROKE.type:
+			// Replace actual present without updating history
+			return {
+				...state,
+				present: {image: action.image}
+			};
+		case actionTypes.UNDO.type:
+			let previous = state.past[state.past.length - 1];
+			let newPast = state.past.slice(0, state.past.length - 1);
+			return {
+				past: newPast,
+				present: previous,
+				future: [state.present, ...state.future]
+			};
+		case actionTypes.REDO.type:
+			let next = state.future[0];
+			let newFuture = state.future.slice(1);
+			return {
+				past: [ ...state.past, state.present ],
+				present: next,
+				future: newFuture
+			};
 		default:
 			return state;
 	}
@@ -40,7 +68,7 @@ export function defaultOptions(state = initialState.defaultOptions, action) {
 }
 
 const reducer = combineReducers({
-	canvas: undoable(canvasContext),
+	canvas,
 	tool,
 	stroke,
 	defaultOptions

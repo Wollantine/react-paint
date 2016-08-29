@@ -5,7 +5,7 @@ const UndoerView = (props) => {
 	const {undo, redo} = props;
 
 	return (
-		<Col md={4} mdOffset={2}>
+		<Col md={4}>
 			<ButtonGroup>
 				<Button onClick={undo}><Glyphicon bsClass="fa" glyph="undo"/></Button>
 				<Button onClick={redo}><Glyphicon bsClass="fa" glyph="repeat"/></Button>

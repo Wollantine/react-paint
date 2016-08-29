@@ -9,13 +9,13 @@ export const renderColorButton = (color, key, onClick) => (
 );
 
 export const renderRowOfButtons = (colors, key, onClick) => (
-	<Row key={key}>
+	<div key={key}>
 		<ButtonToolbar>
 			{colors.map((color, index) => {
 				return renderColorButton(color, key+'-'+index, onClick);
 			})}
 		</ButtonToolbar>
-	</Row>
+	</div>
 );
 
 export const splitInChunks = (array, maxRowSize) => {

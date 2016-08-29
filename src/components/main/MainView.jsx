@@ -8,11 +8,11 @@ export default (props) => {
 	const {width, height, store} = props;
 
 	return (
-		<Col className="main" mdOffset={2} md={8}>
-			<Col md={7}>
+		<Col className="main" lgOffset={2} lg={8} md={12} sm={12} xs={12}>
+			<Col lg={7} md={7} sm={7} xs={12}>
 				<Canvas width={width} height={height} store={store}/>
 			</Col>
-			<Col md={5}>
+			<Col md={5} lg={5} sm={4} xs={12}>
 				<Toolbox/>
 			</Col>
 		</Col>

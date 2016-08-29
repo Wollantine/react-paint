@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
 import CanvasView from './CanvasView.jsx';
-import Editor from './Editor.js';
+import Editor from './ConnectedEditor.js';
 
 export class Canvas extends Component {
 
@@ -18,7 +17,6 @@ export class Canvas extends Component {
 
 
 	initEditor(canvas) {
-		console.log(this.props.store)
 		this.editor = new Editor(canvas, this.props.width, this.props.height, this.props.store);
 	}
 

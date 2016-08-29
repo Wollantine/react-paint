@@ -17,7 +17,11 @@ const actionTypes = {
 	},
 	DRAW_STROKE: {
 		type: 'react-paint/canvas/DRAW_STROKE',
-		args: ['canvas']
+		args: ['image']
+	},
+	EXTEND_STROKE: {
+		type: 'react-paint/canvas/EXTEND_STROKE',
+		args: ['image']
 	}
 };
 

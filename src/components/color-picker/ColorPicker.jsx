@@ -24,7 +24,7 @@ export class ColorPickerContainer extends Component {
 		return (
 			<ColorPickerView 
 				defaultColors={defaultColors} 
-				rowSize={5} 
+				rowSize={5}
 				onChangeColor={this.changeColor.bind(this)}
 			/>
 		);

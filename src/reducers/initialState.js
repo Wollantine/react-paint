@@ -1,5 +1,11 @@
 const initialState = {
-	canvas: null,
+	canvas: {
+		past: [],
+		present: {
+			image: null
+		},
+		future: []
+	},
 	// Current tool
 	tool: {
 		type: 'brush'
