@@ -6,19 +6,19 @@ import Editor from './Editor.js';
 export class Canvas extends Component {
 
 	static propTypes = {
-		width: PropTypes.integer.isRequired,
-		height: PropTypes.integer.isRequired,
+		width: PropTypes.number.isRequired,
+		height: PropTypes.number.isRequired,
 		store: PropTypes.any.isRequired
 	};
 	
 	constructor(props) {
 		super(props);
-
 		this.editor = null;
 	}
 
 
 	initEditor(canvas) {
+		console.log(this.props.store)
 		this.editor = new Editor(canvas, this.props.width, this.props.height, this.props.store);
 	}
 

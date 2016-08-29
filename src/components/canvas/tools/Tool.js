@@ -1,14 +1,40 @@
 import { connect, getDiff } from 'redux-haiku';
+import createAction from '../../../actions/ActionFactory.js';
 
 /* abstract */ class Tool {
 
-	constructor(context, stroke) {
+	constructor(context, stroke, width, height, store) {
 		this.ctx = context;
 		this.stroke = stroke;
+		this.width = width;
+		this.height = height;
+		this.connectToStore(store);
+	}
+
+	connectToStore(store) {
+		this.store = store;
+		connect(this.mapStateToProps, this.mapDispatchToProps)(this.listener.bind(this))(store);
+	}
+
+	listener({stroke, drawStroke}) {
+		this.drawStroke = drawStroke;
+		this.setStroke(stroke);
+	}
+
+	mapStateToProps(state) {
+		return {
+			stroke: state.stroke
+		};
+	}
+
+	mapDispatchToProps(dispatch) {
+		return {
+			drawStroke: (canvas) => dispatch(createAction('DRAW_STROKE', {canvas}))
+		}
 	}
 
 	dispatchNewState() {
-		
+		this.drawStroke(this.ctx.getImageData(0, 0, this.width, this.height));
 	}
 
 	setStroke(stroke) {

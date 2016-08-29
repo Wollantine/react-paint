@@ -2,8 +2,8 @@ import Tool from './Tool.js';
 
 class Brush extends Tool {
 
-	constructor(context, stroke) {
-		super(context, stroke);
+	constructor(...params) {
+		super(...params);
 
 		this.outside = false;
 		this.shouldPaint = false;
