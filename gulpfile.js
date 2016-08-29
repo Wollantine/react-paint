@@ -12,6 +12,8 @@ var watchify = require('watchify');
 var babelify = require('babelify');
 var exorcist = require('exorcist');
 var browserSync = require('browser-sync').create();
+var ghPages = require('gulp-gh-pages');
+var importCss = require('gulp-import-css');
 
 // Configure browserify
 var options = {
@@ -53,8 +55,19 @@ function bundle() {
 }
 
 
-gulp.task('bundle', function() {
+gulp.task('bundle', function () {
 	return bundle();
+});
+
+gulp.task('bundleCss', function () {
+    return gulp.src('./src/**/*.css')
+        .pipe(importCss())
+        .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('deploy', ['bundle', 'bundleCss'], function() {
+    return gulp.src('./dist/**/*')
+        .pipe(ghPages());
 });
 
 
@@ -64,4 +77,4 @@ gulp.task('default', ['bundle'], function () {
         server: "./",
         files: ['src/*']
     });
-})
+});
