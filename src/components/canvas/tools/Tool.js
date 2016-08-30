@@ -43,7 +43,7 @@ import createAction from '../../../actions/ActionFactory.js';
 	}
 
 	paintPath(points) {
-		if (points.length > 0) {
+		if (Array.isArray(points) && points.length > 0) {
 			this.ctx.beginPath();
 			this.ctx.moveTo(points[0].x, points[0].y);
 			for (var i = 0; i < points.length; i++) {

@@ -40,4 +40,18 @@ describe('<Undoer/>', () => {
         wrapper.find('button').last().should.not.be.disabled();
     })
 
+    it('should call onUndo when clicking the first button', () => {
+        view = <UndoerContainer onUndo={onUndo} onRedo={onRedo} past={['1']} future={['2']} />;
+        wrapper = mount(view);
+        wrapper.find('button').first().simulate('click');
+        onUndo.should.have.been.called;
+    })
+
+    it('should call onRedo when clicking the last button', () => {
+        view = <UndoerContainer onUndo={onUndo} onRedo={onRedo} past={['1']} future={['2']} />;
+        wrapper = mount(view);
+        wrapper.find('button').last().simulate('click');
+        onRedo.should.have.been.called;
+    })
+
 });

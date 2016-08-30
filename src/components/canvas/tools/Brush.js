@@ -83,9 +83,7 @@ class Brush extends Tool {
 		this.paintMove({x, y});
 		this.shouldPaint = false;
 		this.saveImage();
-		if (this.hasBeenOutside) {
-			this.hasBeenOutside = false;
-		}
+		this.hasBeenOutside = false;
 	}
 
 	onMouseOut({x, y}, event) {
