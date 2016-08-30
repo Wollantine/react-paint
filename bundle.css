@@ -3,6 +3,9 @@ canvas {
 }
 .color-button {
 }
+.toolbox-elem {
+	margin: 10px 0 10px 0;
+}
 /* Bootstrap styles */
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css");
 
@@ -11,7 +14,4 @@ canvas {
 
 .main {
 	margin-top: 20px;
-}
-.toolbox-elem {
-	margin: 10px 0 10px 0;
 }
