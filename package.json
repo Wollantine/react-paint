@@ -1,6 +1,6 @@
 {
   "name": "react-paint",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React implementation of a simple paint tool in html5's canvas.",
   "main": "index.js",
   "scripts": {
