@@ -1,5 +1,5 @@
-import actionTypes from '../actionTypes.js';
-import Action from './Action.js';
+import actionTypes from '../actions.json';
+import Action from '../Action.js';
 import initialState from '../../reducers/initialState.js';
 
 const spec = actionTypes.CHANGE_STROKE_PROPERTY;

@@ -1,27 +1,25 @@
 import {combineReducers} from 'redux';
-import actionTypes from '../actions/actionTypes.js';
+import type from './types.js';
 import initialState from './initialState.js';
 
-const CHANGE_STROKE_PROPERTY = actionTypes.CHANGE_STROKE_PROPERTY.type;
 
 
-
-function canvas(state = initialState.canvas, action) {
+export function canvas(state = initialState.canvas, action) {
 	switch (action.type) {
-		case actionTypes.DRAW_STROKE.type:
+		case type('DRAW_STROKE'):
 			// Update history
 			return {
 				past: [...state.past, state.present],
 				present: {image: action.image},
 				future: []
 			};
-		case actionTypes.EXTEND_STROKE.type:
+		case type('EXTEND_STROKE'):
 			// Replace actual present without updating history
 			return {
 				...state,
 				present: {image: action.image}
 			};
-		case actionTypes.UNDO.type:
+		case type('UNDO'):
 			let previous = state.past[state.past.length - 1];
 			let newPast = state.past.slice(0, state.past.length - 1);
 			return {
@@ -29,7 +27,7 @@ function canvas(state = initialState.canvas, action) {
 				present: previous,
 				future: [state.present, ...state.future]
 			};
-		case actionTypes.REDO.type:
+		case type('REDO'):
 			let next = state.future[0];
 			let newFuture = state.future.slice(1);
 			return {
@@ -51,7 +49,7 @@ function tool(state = initialState.tool, action) {
 
 export function stroke(state = initialState.stroke, action) {
 	switch (action.type) {
-		case CHANGE_STROKE_PROPERTY:
+		case type('CHANGE_STROKE_PROPERTY'):
 			if (state[action.property]) {
 				return {...state, [action.property]: action.value};
 			}

@@ -16,18 +16,18 @@ class Action {
 		this.data = data;
 	}
 
-	/**
-	 * Template method. Override this.
-	 */
-	buildAction() {
+	rawAction() {
 		return {
 			type: this.type,
 			...this.data
 		};
 	}
 
+	/**
+	 * Template method. Override this.
+	 */
 	getDispatchable() {
-		return this.buildAction();
+		return this.rawAction();
 	}
 }
 

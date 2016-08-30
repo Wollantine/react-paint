@@ -9,7 +9,7 @@ export const renderColorButton = (color, key, onClick) => (
 );
 
 export const renderRowOfButtons = (colors, key, onClick) => (
-	<div key={key}>
+	<div className="colors-row" key={key}>
 		<ButtonToolbar>
 			{colors.map((color, index) => {
 				return renderColorButton(color, key+'-'+index, onClick);

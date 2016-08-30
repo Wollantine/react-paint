@@ -6,6 +6,8 @@ import createAction from '../../actions/ActionFactory.js';
 export class UndoerContainer extends Component {
 
 	static propTypes = {
+		past: PropTypes.array.isRequired,
+		future: PropTypes.array.isRequired,
 		onUndo: PropTypes.func.isRequired,
 		onRedo: PropTypes.func.isRequired
 	};
@@ -15,15 +17,20 @@ export class UndoerContainer extends Component {
 	}
 
 	render() {
-		const {onUndo, onRedo} = this.props;
+		const {onUndo, onRedo, past, future} = this.props;
 
 		return (
-			<UndoerView undo={onUndo} redo={onRedo}/>
+			<UndoerView undo={onUndo} redo={onRedo} canUndo={past.length > 0} canRedo={future.length > 0}/>
 		);
 	}
 
 }
 
+
+const mapStateToProps = (state) => ({
+	past: state.canvas.past,
+	future: state.canvas.future
+});
 
 const mapDispatchToProps = (dispatch) => ({
 	onUndo: () => {
@@ -35,7 +42,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Undoer = connect(
-	null,
+	mapStateToProps,
 	mapDispatchToProps
 )(UndoerContainer);
 

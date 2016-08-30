@@ -1,35 +1,27 @@
-import actionTypes from './actionTypes.js';
-
-/**
- *	# Important Note
- *
- * This should import all the classes in ./action-classes folder.
- *
- * This is because browserify doesn't support dynamic require()s
- * (requiring modules in runtime that could not get bundled 
- * previously because static code analysis didn't see them required).
- */
-import './action-classes/Action.js';
-import './action-classes/ChangeStrokeProperty.js';
-
+import actionTypes from './actions';
+import Action from './Action';
+import * as actionClasses from 'glob:action-classes/*.js';
 
 
 export class ActionFactory {
 	
-	getActionSpecification(actionName) {
+	getActionSpecification(actionName, actionTypes) {
 		let actionSpec = actionTypes[actionName];
+
 		if (typeof actionSpec === 'undefined') {
 			throw new Error('Action type '+actionName+' does not exist.')
 		}
-		return actionSpec;
-	}
-
-	getActionType(actionName, actionSpec) {
-		let type = actionSpec.type;
-		if (typeof type === 'undefined') {
-			throw new SyntaxError('Missing field "type" for the action '+actionName+' in actionTypes.');
+		if (typeof actionSpec.type == 'undefined') {
+			throw new Error('Mandatory field "type" not specified for action '+actionName+' in actions.json.');
 		}
-		return type;
+		if (typeof actionSpec.args == 'undefined') {
+			throw new Error('Mandatory field "args" not specified for action '+actionName+' in actions.json.');
+		}
+		if (!Array.isArray(actionSpec.args)) {
+			throw new Error('Field "args" should be an array for action '+actionName+' in actions.json');
+		}
+
+		return actionSpec;
 	}
 
 	getValidatedData(actionName, actionSpec, data) {
@@ -42,30 +34,49 @@ export class ActionFactory {
 		}, {});
 	}
 
-	getActionClassName(actionSpec) {
-		let className = actionSpec.class;
-		if (typeof className === 'undefined') {
-			// base class
-			className = 'Action';
+	getActionClass(className, actionClasses) {
+		let actionClass = actionClasses[className];
+
+		if (typeof actionClass == 'undefined') {
+			actionClass = Action;
 		}
-		return className;
+
+		return actionClass;
 	}
 
-	// Requires the class from this folder
-	getActionClass(actionSpec) {
-		return require('./action-classes/'+this.getActionClassName(actionSpec)+'.js').default;
+	getActionObject(actionName, actionData) {
+		const spec = this.getActionSpecification(actionName, actionTypes);
+
+		const ActionClass = this.getActionClass(spec.class, actionClasses);
+
+		return new ActionClass(spec.type, this.getValidatedData(actionName, spec, actionData));
 	}
 
-	createAction(actionName, data) {
-		let spec = this.getActionSpecification(actionName);
-
-		let type = this.getActionType(actionName, spec);
-		data = this.getValidatedData(actionName, spec, data);
-
-		let Action = this.getActionClass(spec);
-		let action = new Action(type, data);
-
+	/**
+	 * Returns a dispatchable object/function for this action, if data fits the specs in actions.json.
+	 *
+	 * @param actionName {string} The name of the action in actions.json.
+	 * @param actionData {object} The named parameters that action takes.
+	 * @returns {*|mixed} If no class is defined in actions.json for this actionName, a raw action object with
+	 *  the actionData as params and an additional param type. If otherwise a class is defined, whatever that class's
+	 *  getDispatchable() returns.
+	 */
+	createAction(actionName, actionData) {
+		let action = this.getActionObject(actionName, actionData);
 		return action.getDispatchable();
+	}
+
+	/**
+	 * Always returns a synchronously dispatchable object, never a function. Warning: Intended use for testing,
+	 *  do not use in production.
+	 *
+	 * @param actionName {string} The name of the action in actions.json.
+	 * @param actionData {object} The named parameters that action takes.
+	 * @return A raw action object with the actionData as params and an additional param type.
+	 */
+	createRawAction(actionName, actionData) {
+		let action = this.getActionObject(actionName, actionData);
+		return action.rawAction();
 	}
 
 }
