@@ -1,5 +1,5 @@
 import createAction from '../../src/actions/ActionFactory.js';
-import actionTypes from '../../src/actions/actionTypes.js';
+import actionTypes from '../../src/actions/actions.json';
 
 
 describe('ActionFactory', () => {

@@ -51,11 +51,11 @@ class ConnectedEditor extends Editor {
     }
 
     onMouseUp(event) {
-        return this.tool.onMouseUp(event);
+        return this.tool.onMouseUp(this.getCursorPosition(event), event);
     }
 
     onMouseOut(event) {
-        return this.tool.onMouseOut(event);
+        return this.tool.onMouseOut(this.getCursorPosition(event), event);
     }
 }
 

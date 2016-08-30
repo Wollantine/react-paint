@@ -19,8 +19,8 @@ const UndoerView = (props) => {
 };
 
 UndoerView.propTypes = {
-	past: PropTypes.array.isRequired,
-	future: PropTypes.array.isRequired,
+	canUndo: PropTypes.bool.isRequired,
+	canRedo: PropTypes.bool.isRequired,
     undo: PropTypes.func.isRequired,
     redo: PropTypes.func.isRequired
 };

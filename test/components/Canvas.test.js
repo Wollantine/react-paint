@@ -1,5 +1,5 @@
 import {render, mount} from 'enzyme';
-import CanvasView from '../../src/components/size-picker/SizePickerView.jsx';
+import CanvasView from '../../src/components/canvas/CanvasView.jsx';
 
 describe('<CanvasView/>', () => {
 
@@ -7,13 +7,9 @@ describe('<CanvasView/>', () => {
 		wrapper = null;
 
 
-	it('should render a canvas', () => {
+	it('should render a canvas');
 
-	});
-
-	it('should render a canvas of the appropriate size', () => {
-
-	});
+	it('should render a canvas of the appropriate size');
 
 	// Functional unit tests
 	describe('retrieveCanvasDetails', () => {

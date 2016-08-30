@@ -1,5 +1,5 @@
 import Action from '../../src/actions/action-classes/ChangeStrokeProperty.js';
-import actionTypes from '../../src/actions/actionTypes.js';
+import actionTypes from '../../src/actions/actions.json';
 
 
 describe('ChangeStrokeProperty', () => {

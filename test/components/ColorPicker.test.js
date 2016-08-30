@@ -112,7 +112,7 @@ describe('<ColorPickerView/>', () => {
 
 		it('should render all rows', () => {
 			let numOfRows = parseInt(defaultColors.length / rowSize) + 1;
-			wrapper.should.have.exactly(numOfRows).descendants('.row');
+			wrapper.should.have.exactly(numOfRows).descendants('.colors-row');
 		})
 
 		it('should distinguish between clicks in two different buttons with colors', () => {

@@ -1,4 +1,4 @@
-import Action from '../../src/actions/action-classes/Action.js';
+import Action from '../../src/actions/Action.js';
 
 describe('Action', () => {
 	it('should create an action', () => {

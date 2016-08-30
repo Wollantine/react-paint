@@ -13,6 +13,22 @@ describe('Stroke reducer', () => {
 			actual.should.deep.equal(expected);
 		});
 
+		it('should not change size when NaN', () => {
+			let action = createAction('CHANGE_STROKE_PROPERTY', {property: 'size', value: NaN});
+			let expected = {color: '#000', size: 3};
+			let actual = reducer(expected, action);
+
+			actual.should.deep.equal(expected);
+		})
+
+		it('should not change size when < 1', () => {
+			let action = createAction('CHANGE_STROKE_PROPERTY', {property: 'size', value: 0});
+			let expected = {color: '#000', size: 3};
+			let actual = reducer(expected, action);
+			
+			actual.should.deep.equal(expected);
+		})
+
 	});
 
 });

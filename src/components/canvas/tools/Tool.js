@@ -71,14 +71,14 @@ import createAction from '../../../actions/ActionFactory.js';
 	/**
 	 * Abstract method. Override this.
 	 */
-	onMouseUp(event) {
+	onMouseUp({x, y}, event) {
 		throw Error('Please implement onMouseUp method.');
 	}
 
 	/**
 	 * Abstract method. Override this.
 	 */
-	onMouseOut(event) {
+	onMouseOut({x, y}, event) {
 		throw Error('Please implement onMouseOut method.');
 	}
 

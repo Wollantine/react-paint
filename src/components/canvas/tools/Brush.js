@@ -42,6 +42,12 @@ class Brush extends Tool {
 
 	paintMove({x, y}) {
 		if (this.shouldPaint) {
+			let {x: xs, y: ys} = this.startPoint;
+			// If we hadn't moved, draw a line of 1px
+			if (xs == x && ys == y) {
+				x++;
+				y++;
+			}
 			this.paintPath([this.startPoint, {x, y}]);
 		}
 	}
@@ -73,7 +79,8 @@ class Brush extends Tool {
 		this.startPoint = {x, y};
 	}
 
-	onMouseUp(event) {
+	onMouseUp({x, y}, event) {
+		this.paintMove({x, y});
 		this.shouldPaint = false;
 		this.saveImage();
 		if (this.hasBeenOutside) {
