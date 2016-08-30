@@ -14,6 +14,7 @@ var exorcist = require('exorcist');
 var browserSync = require('browser-sync').create();
 var ghPages = require('gulp-gh-pages');
 var importCss = require('gulp-import-css');
+var concat = require('gulp-concat');
 
 // Configure browserify
 var options = {
@@ -54,18 +55,36 @@ function bundle() {
         .pipe(browserSync.stream({once: true}));
 }
 
+function bundleForDeploy() {
+    return bundler.bundle()
+        .on('error', function (err) {
+            gutil.log(err.message);
+            browserSync.notify("Browserify Error!");
+            this.emit("end");
+        })
+        .pipe(exorcist('dist/bundle.js.map'))
+        .pipe(source('bundle.js'))
+        .pipe(gulp.dest('./dist'));
+}
+
 
 gulp.task('bundle', function () {
 	return bundle();
 });
 
-gulp.task('bundleCss', function () {
-    return gulp.src('./src/**/*.css')
-        .pipe(importCss())
-        .pipe(gulp.dest('./dist'));
+gulp.task('deployBundle', function () {
+    return bundleForDeploy();
 });
 
-gulp.task('deploy', ['bundle', 'bundleCss'], function() {
+// TODO improve
+gulp.task('bundleCss', function () {
+    return gulp.src('./src/**/*.css')
+        .pipe(concat('bundle.css'))
+        // .pipe(importCss())
+        .pipe(gulp.dest('./dist'))
+});
+
+gulp.task('deploy', ['deployBundle', 'bundleCss'], function() {
     return gulp.src('./dist/**/*')
         .pipe(ghPages());
 });

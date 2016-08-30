@@ -1,6 +1,6 @@
 {
   "name": "react-paint",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "React implementation of a simple paint tool in html5's canvas.",
   "main": "index.js",
   "scripts": {
@@ -39,6 +39,7 @@
     "enzyme": "^2.4.1",
     "exorcist": "^0.4.0",
     "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
     "gulp-connect": "^5.0.0",
     "gulp-gh-pages": "^0.5.4",
     "gulp-import-css": "^0.1.2",

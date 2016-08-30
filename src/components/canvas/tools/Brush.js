@@ -19,7 +19,7 @@ class Brush extends Tool {
 
 		/**
 		 * The point from which next line in the path must begin.
-		 * @type {null}
+		 * @type {object}
          */
 		this.startPoint = null;
 
