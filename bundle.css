@@ -7,7 +7,7 @@ canvas {
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css');
 
 /* Font Awesome */
-@import url('./assets/vendor-css/font-awesome.min.css');
+@import url('../../../assets/vendor-css/font-awesome.min.css');
 
 .main {
 	margin-top: 20px;
